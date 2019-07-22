@@ -22,7 +22,12 @@
 
 # This will print two lines. The first one is the the total vRAM available,
 # while the second one is the used vRAM.
-nvidia-smi -i 0 -q -d MEMORY | grep -A4 -i gpu | egrep -i "used|total" | awk '{print $3}'
+totalVRAM="8129m"
+usedVRAM=$(bash "/usr/joern/Linux/bash/myradeontop.sh" | awk '{print $28}' | sed 's/.$//')
 
 # This line will print the GPU usage in %.
-nvidia-smi -i 0 -q -d UTILIZATION | grep Gpu | awk '{print $3}'
+percGPU=$(bash "/usr/joern/Linux/bash/myradeontop.sh" | awk '{print $5}' | sed 's/.$//')
+
+echo "$totalVRAM"
+echo "$usedVRAM"
+echo "$percGPU"
